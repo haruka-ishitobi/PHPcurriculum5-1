@@ -1,0 +1,27 @@
+table{
+    margin: 10px auto;
+    height: 100%;
+    width: 100%;
+    
+    background-color: #e0ffff;
+    
+        
+    
+}
+
+
+tr{
+    text-align: center;
+    background-color: #87ceeb;
+    border: none;
+    width:auto;
+    height: auto;
+}
+
+
+body{
+    
+    height: auto;
+    background-color:white;
+    
+}
