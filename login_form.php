@@ -39,7 +39,7 @@ session_destroy();
             </form>
 
     </div>
-    <a href="login_form.php">新規登録はこちら</a>
+    <a href="resister.php">新規登録はこちら</a>
 </body>
 </html>
 

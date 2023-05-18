@@ -38,7 +38,7 @@ $book= UserLogic::getbookData();
             <td><?php echo $column["stock"]; ?></td>
             <td><a href="delete_post.php?id=<?php echo $column["id"]; ?>">削除</a></td>
         </tr> 
-        <?php endforeach; ?>
+      <?php endforeach; ?>
     </table>    
 </body>
 </html>

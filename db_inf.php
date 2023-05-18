@@ -8,8 +8,6 @@ function connect(){
     $user = "root";
     $pass = "";
 
-    
-    
     try{
         $dbh= new PDO($dsn,$user,$pass,array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));
         return $dbh;

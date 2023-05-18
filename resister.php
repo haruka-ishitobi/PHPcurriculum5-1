@@ -3,9 +3,47 @@ session_start();
 require_once ('UserLogic.php');
 
 
+$err = array();
 
-$login_err=isset($_SESSION['login_err']) ? $_SESSION['login_err'] :null;
-unset($_SESSION['login_err']);
+
+if (!empty($_POST)) {
+    // ログイン名が入力されていない場合の処理
+    if (empty($_POST['username'])) {
+        $err[] = "ユーザー名をいれてください";
+    }
+    
+    // パスワードが入力されていない場合の処理
+    if (empty($_POST['password'])) {
+        $err[] = "パスワードが未入力です。";
+    }
+
+
+    if(!empty($_POST['password'])&& !empty($_POST['password'])){
+        $username = htmlspecialchars($_POST['username'],ENT_QUOTES);
+        $password = htmlspecialchars($_POST['password'],ENT_QUOTES);
+
+
+        if(!preg_match("/[a-zA-Z0-9]{8,100}/",$password)){
+            $err[] = "パスワードを英数字8文字以上100文字以内で入力してください";
+        }
+    }
+
+if (count($err)=== 0){
+
+    $created = UserLogic::createUser($_POST);
+    if(!$created){
+        $err[] = "登録できませんでした。";
+    }
+    if($created){
+        header('Location:login_form.php');
+    }
+   
+}
+}
+
+
+
+
 
 
 ?>
@@ -19,13 +57,15 @@ unset($_SESSION['login_err']);
     <title>ユーザー登録画面</title>
 </head>
 <body>
-
+<h1>ユーザー登録画面</h1>
    <div>
-        <h1>ユーザー登録画面</h1>
-        <?php if (isset($login_err)) : ?>
-                    <p><?php echo $login_err ; ?></p>
-                <?php endif; ?>
-            <form action="finish.php" method="POST">
+        <?php if (count($err)>0) : ?>
+            <?php foreach($err as $e) : ?>
+                <p><?php echo $e ?></p>    
+            <?php endforeach;?>  
+        <?php endif;?>
+        
+            <form action="" method="POST">
                 <p><input type="text" name="username" placeholder="ユーザー名"></p>
                 <p><input type="password" name="password" placeholder="パスワード"></p>
                 <p><input type="submit" value="新規登録"></p>

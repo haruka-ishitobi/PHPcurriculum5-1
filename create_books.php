@@ -26,7 +26,7 @@ if(count($err)>0){
 $_SESSION['e_msg']= $err;
 
 if (count($err)===0){
-
+    $bookdata['title']=htmlspecialchars($bookdata['title'],ENT_QUOTES);
     
 
 $resistered=UserLogic::resister_book($bookdata);

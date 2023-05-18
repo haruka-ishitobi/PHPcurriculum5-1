@@ -27,7 +27,7 @@ if (count($err)>0){
 $result = UserLogic::login($username,$password);
 
 
-$_SESSION['login_user']=$result;
+
 
 if(!$result){
     header('Location: login_form.php');

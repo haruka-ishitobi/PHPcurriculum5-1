@@ -47,28 +47,30 @@ class UserLogic{
             $stmt = connect()->prepare($sql_getUser);
             $stmt->execute($arr);
             $user = $stmt->fetch();
-            return $user;
+
+            if(!$user){
+                $_SESSION['E_msg']="該当するユーザーがいません";
+                return $result;
+            }
+    
+            if(password_verify($password,$user['password'])){
+                
+                session_regenerate_id(true);
+                $_SESSION['login_user'] = $user;
+                $result= true;
+                return $result;
+             } else{
+             
+             $_SESSION['E_msg']="パスワードが違います";
+             return $result;
+             }
+             
         } catch(\Exception $e){
-            return false;
-        }
-
-
-        if(!$user){
-            $_SESSION['E_msg']="ユーザー名が違います";
-            return $result;
-        }
-
-        if(password_verify($password,$user['password'])){
             
-            session_regenerate_id(true);
-            $_SESSION['login_user'] = $user;
-            $result= true;
-            return $result;
-         } else{
-         
-         $_SESSION['E_msg']="パスワードが違います";
-         return $result;
-         }
+        }
+
+
+       
     }
 
     /**
@@ -109,7 +111,7 @@ class UserLogic{
         $stmt_getbooks =$dbh ->query($sql_getbooks)->fetchALL(PDO::FETCH_ASSOC);
         $book= $stmt_getbooks;
         return $book;
-        $dbh=null;
+        
         }catch(\Exception $e){
             return false;
         }
@@ -139,11 +141,6 @@ class UserLogic{
             }
 
     }
-
-
-
-
-   
 
 
 

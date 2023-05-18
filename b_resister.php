@@ -1,7 +1,7 @@
 <?php 
 session_start();
 require_once("UserLogic.php");
-UserLogic::checklogin(); 
+
 
 $err=$_SESSION['e_msg'];
 $_SESSION['e_msg']=array();

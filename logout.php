@@ -18,13 +18,7 @@ if(!$result){
 
 UserLogic::logout();
 
-
-
 ?>
-
-
-
-
 
 
 

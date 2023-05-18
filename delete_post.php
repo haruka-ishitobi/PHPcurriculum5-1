@@ -4,12 +4,7 @@ session_start();
 require_once("db_inf.php");
 require_once("UserLogic.php");
 
-
-
-
 UserLogic::checklogin();        
-
-
 
 
 $id=$_GET['id'];
